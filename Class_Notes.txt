@@ -1,0 +1,354 @@
+20th April 2024 
+
+AZ-400 
+
+************************
+Day 1 - 20th April 2024 
+************************
+
+	- Introduction to DevOps 
+	
+	- Introduction to Azure DevOps Services
+	
+	
+	DevOps ?
+	
+	SDLC Process ::: Software Development Lifecycle
+	
+	Software Application :
+	
+		- Web Applications 
+		
+		- Mobile Applications 
+		
+		- Desktop Applications 
+		
+		- System Software Applications
+		
+		- Embedded Software Applications
+		
+			Chip Level Programming 
+	
+	
+	
+	Desktop Application ::
+	
+		- Billing System to a Super-Market
+		
+			- Functions:
+				- Create a user-interface 
+				- Create Login Process 
+				- Inventory Management 
+				- Database Management 
+				- Payment - Cash 
+					Card Payment
+
+	SDLC Process ::: Software Development Lifecycle:
+
+		1. Requirement Analysis 
+		2. Design
+		3. Coding - Application Development 
+		4. Testing
+		5. Implemented to Production 
+		6. Monitoring/Maintainence of project
+		
+	Water-fall Model ::
+		- Linear in fashion
+		- Top-down Approach
+		- It was implemented for tightly coupled application architecture 
+			- Monolith Application Architecture
+				- tightly coupled application 
+
+		Core_project :
+			1. Requirement Analysis 				- 5 functions, 8 Months
+			2. Design
+			3. Coding - Application Development 	- 4 Month
+			4. Testing
+			5. Implemented to Production 
+			6. Monitoring/Maintainence of project
+
+		Enhancement_project :
+			1. Requirement Analysis 				
+			2. Design
+			3. Coding - Application Development 	
+			4. Testing
+			5. Implemented to Production 
+			6. Monitoring/Maintainence of project
+		
+		
+	AGILE Methodologies :::
+	
+		The Project/Application will be splitted into various function/modules/Iterations
+	
+		- Using AGILE Methodologies 
+			We can achieve :
+			
+				- Continuous Development
+				- Continuous Integration 
+				- Continuous Testing 
+				- Continuous Delivery 
+					- It is used to release the changes to production environment with manual approvals
+					- This expects manual/Approval intervension for Production Releases
+					- Expect Downtime during production release
+		
+			We cannot Achieve :
+			
+				- Continuous Deployment 
+					- This is used to release the changes to Production Environment without any manual approvals	
+					- Zero-Downtime during production release.
+					
+			- Functions:
+				- Create a user-interface 
+				- Create Login Process 
+				- Inventory Management 
+				- Database Management 
+				- Payment - Cash 
+					Card Payment
+					
+		Iteration1:  Create a user-interface 
+
+			1. Requirement Analysis 				
+			2. Design
+			3. Coding - Application Development 	
+			4. Testing
+			5. Implemented to further testing
+
+		Iteration2:  Create Login Process  
+
+			1. Requirement Analysis 				
+			2. Design
+			3. Coding - Application Development 	
+			4. Testing
+			5. Implemented to further testing
+			
+
+		Iteration - nth:  	Card Payment 
+
+			1. Requirement Analysis 				
+			2. Design
+			3. Coding - Application Development 	
+			4. Testing
+			5. Implemented to further testing
+		
+	DevOps :
+		- DevOps is a Software Development Strategy/Process which helps promote the collaboration between the teams like Development Team and Operations Team to achieve Continuous Development, Continuous Integration, Continuous Testing, Continuous Delivery, Continuous Deployment and Continuous Monitoring in a more automated fashion.
+		
+	How to Implement DevOps ???
+	
+		Teams:
+
+		DevOps Team :
+			- Infra-Structure Management Team 		- Create Infra-Structure & Configure Infra-Structure - IAC 
+			- Applications Development Team
+			- Testing Team 
+			- Release Management Team 
+			- Production Support Team 
+			- Production Monitoring Team 
+			- Security Team 
+			
+	
+		Detailed DevOps Assessment:
+		
+			- Assessment Report :::
+			
+				- Choose the DevOps Tools :
+			
+			
+		DevOps Stages :::
+		
+			- Continuous Development :
+				- It is a capability of Development Team to Continuously Develop the Business Application
+				- Improve the developers productivity.
+				
+				- Role of Developer :
+				
+					Develop Business Application Coding 
+					
+				1. Coding -- Java / C#.net  High Level Lang.
+				2. Application Build  
+					- It is process of compiling the source code and create artifacts(Binaries - *.war/*.jar/*.exec/*.dll) 
+				3. Perform Unit Testing 
+				4. Promote the changes for further testing
+				5. Notify the Testing Team thru Email
+								
+			DevOps Approach:
+			
+				1. Coding the Application 
+				2. Save/Commit the code in the source code repository(github/azure repo)
+				
+			Thru DevOps Automation (Pipeline):
+			
+				3. Application Build  
+					- It is process of compiling the source code and create artifacts(Binaries - *.war/*.jar/*.exec/*.dll) 
+				4. Perform Unit Testing 
+				5. Promote the changes for further testing
+				6. Notify the Testing Team thru. Email			
+
+			
+				Tools:
+				
+					IDEs - Integrated Development Environment - Eclipse based IDEs, Visual Studio, Visual Studio Code, Pycharm
+					git,github/Azure Repos				
+			
+			- Continuous Integration ::
+				- It is a capability of Development Team to Continuously Integrate the changes for further Testing.
+			
+				Tools:
+
+					IDEs - Integrated Development Environment - Eclipse based IDEs, Visual Studio, Visual Studio Code, Pycharm
+					git,github/Azure Repos		
+					Azure Pipeline/Jenkins/gitlab-ci
+
+				
+			- Continuous Testing ::
+			
+				- Process of Continuously Test the Changes without impacting others
+				
+				Testing 
+				
+					QA  - Quality Assurance Testing 
+					UAT - User Acceptance Testing 
+				
+				Tools :
+				
+					Azure Pipeline/Jenkins/gitlab-ci
+					Selenium/TestNG/Azure Test Service
+						- Test Data/Test Scenarios/Cases
+			
+			- Continuous Delivery / Continuous Deployment
+				- Both Continuous Delivery & Deployment are used to perform Production Releases.
+			
+				- Continuous Delivery 
+					- It is used to release the changes to production environment with manual approvals
+					- This expects manual/Approval intervension for Production Releases
+					- Expect Downtime during production release
+
+					Eg.: 
+					Banking Service - Online Banking Service ::
+					
+						SMS Notifications to customers 
+						
+						Production Release Window -- Off-Business Hours - Weekends/Early Mornings
+							4hrs - 6hrs - Prod level testing 
+							
+								- If there is any issue during release 
+									- Fix the issue.
+									- Revert the Changes. 
+									
+				- Continuous Deployment 
+					- This is used to release the changes to Production Environment without any manual approvals	
+					- Zero-Downtime during production release.
+					
+					Eg.: 
+					Facebook/Netflix/Google/Amazon
+					
+				Tools :
+				
+					Azure Pipeline/Azure-Aritfacts/Jenkins/gitlab-ci	
+
+				Application Architecture :::
+				
+					- Monolith Application Architecture
+							- Tightly coupled application - function/modules
+							
+					- Micro-Service Based Application Architecture
+						- Function/modules are called as Micro-Services
+						
+				Web-Application - E_Commerce :::
+				
+				www.amazon.com 
+				
+				Sign_up			- Micro-Service1 - 3-tier application(Front_End/Appln./Database) - develop,test,promote to prod
+				Sign-In 		- Micro-Service2
+				Search 
+				Add to cart 
+				place the order 
+				payment 
+				confirm
+				track
+			
+			- Continuous Monitoring ::
+			
+				- Prevent the production downtime
+				
+				- Infra-Structure Monitoring
+					Memory/CPU/Network/Storage/Traffic
+					
+					Alerts - Azure Monitor/Prometheus/Grafana/Dynatrace 
+					
+				- Application Monitoring
+				
+					AppDynamics/DataDog
+					
+			
+			- Infra-Structure Management Team:
+			
+				- Provision/Create the Infra-Structure	- Terraform/ARM/Cloudformation
+				
+				- Configure the Infra-Structure			- Ansible/chef/puppet
+				
+			
+		DevOps Lifecycle:
+		
+			Developer Code 	--> Commit to Src_Code Repo	--> Build --> Unit Testing --> Promoted to QA/UAT --> Promote to Prod 
+					|																										|
+					|																										|
+					|																										|
+			   Feedback																						Continuous Monitoring
+					|																										|
+					|																										|
+					|																										|
+					---------------------------------------------------------------------------------------------------------	
+		
+			
+		DevOps Tools ::
+		
+			Open-Source DevOps Tools :
+				- github/Jenkins/Docker/Kubernetes/Ansible/Terraform/Prometheus/Grafana/Jira
+			
+			Managed Services:
+				- Azure DevOps Services 
+					-- AzBoard/Repos/Pipeline/Test/Artifacts
+		
+				
+		Cloud Platform :
+
+			AWS 
+			Microsoft Azure Cloud 
+			GCP 
+			
+			
+		DevOps is all about:
+		
+			- People
+			
+			- Process
+			
+			- DevOps Tools 
+			
+		DevOps Team: 12Members
+		
+			DevOps Associate / Sr. DA 
+			DevOps Engineer / Sr. DE 
+			DevOps Lead / Sr. DL 
+			DevOps Architect / Sr. D.Archi
+			DevOps Consultant / Sr. DC 
+			SRE 	
+			DevSecOps 
+			gitOps 
+			AIOps
+			MLOps
+			
+	Next :::
+
+		Working with Azure DevOps Services  $200
+		
+			Azure Portal Account Creation - free tier Account  -	https://portal.azure.com/signin/index/
+				- Email ID 
+				- Valid Mobile Number 
+				- Credit/Debit Card (Eligible for Internation Transaction)
+				
+			github account ????
+		
+
+		
