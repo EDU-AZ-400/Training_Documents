@@ -351,4 +351,233 @@ Day 1 - 20th April 2024
 			github account ????
 		
 
+************************
+Day 2 - 21st April 2024 
+************************		
+
+		Working with Azure DevOps Services
+		
+		Application LifeCycle Management Tool ::::
+		
+		Jira 
+		
+		Project Manager / Agile - Scrum Master 
+		
+		E_Commerce Application ::
+		
+		Requirement Analysis 
+		
+		Modules
+		
+		Resources 
+		
+		Timeline 
+		
+		Dependencies
+		
+			- Containerization 					#Docker 
+			
+			- Container Orchestration 			#Kubernetes 
+			
+			
+			*.java			- Version Controlled using Az Repos / Github Repos 
+			
+			*.war 			- Version Controlled using Artifactory Library - Azure Artifacts / Jfrog Artifactory
+			
+				jdk - 	jdk11 
+						jdk17
+						
+						
+			Maven is build tool: 
+				- Used to build java applications - automate the build, perform unit testing and create artifacts
+				
+				
+				Application Build  
+					- It is process of compiling the source code and create artifacts(Binaries - *.war/*.jar/*.exec/*.dll) 
+					
+					- Maven is a Java Application Build Tool 
+					- Used to build java applications - automate the build, perform unit testing and create artifacts
+					
+				CICD Pipeline Jenkins/AzPipeline ???	--> Build Orchestration Tool
+				
+				
+				build, UT, Create artifacts, deploy to testing, automated testing, release to prod
+				
+			
+			https://portal.azure.com/signin/index/			
+			
+			https://aex.dev.azure.com/
+			
+			Create Organization					# Collection of Azure Projects 	
+			
+			
+			Create Project Contributors / Users at organization level 
+			
+			Create Project 
+			
+			
+			Active Directory : 
+			LDAP
+				sso - single sign-on option
+				
+				rbac - role based access control
+				
+				
+			git/ Github/az Repo # is a distributed VCS:
+			
+			Repository : Collection of Folders and Files which are version controlled
+			
+			Branches?
+				- Logical copy of a repository(Default branch)
+				
+				
+			Git - Open-source Distributed Version Control System 
+				- It is used to version control and track the changes 
+				- It is used to perform parallel development using Branches.
+			
+			master / main branch - default branch. - Production version of source code.
+			
+			Branching Strategies:
+			
+				- It is used to maintain the integrity of master branch.
+				
+			
+			Developer's Workload :
+			
+				- Enhancement_project / Bug_fixing 
+				- New Project 
+				
+				
+			Repository :::
+
+Scenario1:			
+				master -> rel1,rel2,rel3
+				
+							rel1,rel2,rel3,f1cm1,f1cm2,f1cm3		# Upon Merging from feature_Branch1
+				
+					feature_Branch1 - rel1,rel2,rel3,f1cm1,f1cm2,f1cm3
+				
+Scenario2:			
+				master -> rel1,rel2,rel3
+				
+				
+					Developer_Branch1 -- rel1,rel2,rel3
+					
+										rel1,rel2,rel3,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3					
+											
+						feature_Branch1 - rel1,rel2,rel3
+						
+										rel1,rel2,rel3,f1cm1,f1cm2,f1cm3	
+
+						feature_Branch2 - rel1,rel2,rel3			
+					
+										rel1,rel2,rel3,f2cm1,f2cm2,f2cm3
+				
+Scenario3:			
+				master -> rel1,rel2,rel3
+					
+					Integration_Branch - rel1,rel2,rel3																# Team1
+									rel1,rel2,rel3,Developer_Branch1_Changes,Developer_Branch2_Changes							
+				
+						Developer_Branch1 -- rel1,rel2,rel3						
+											rel1,rel2,rel3,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3					
+												
+							feature_Branch1 - rel1,rel2,rel3							
+											rel1,rel2,rel3,f1cm1,f1cm2,f1cm3	
+
+							feature_Branch2 - rel1,rel2,rel3
+											rel1,rel2,rel3,f2cm1,f2cm2,f2cm3
+											
+						Developer_Branch1 -- rel1,rel2,rel3
+											rel1,rel2,rel3,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3					
+												
+							feature_Branch1 - rel1,rel2,rel3
+											rel1,rel2,rel3,f1cm1,f1cm2,f1cm3	
+
+							feature_Branch2 - rel1,rel2,rel3
+											rel1,rel2,rel3,f2cm1,f2cm2,f2cm3
+
+Scenario4:		Repo:
+
+				master -> rel1,rel2,rel3
+				
+								rel1,rel2,rel3,hfc.
+				
+					hotfix_branch --> rel1,rel2,rel3,hfc1,hfc2,hfc3,
+				
+							rel1,rel2,rel3,rel4				# rel4 is a combination of Team1&Team2
+				
+					Release_Branch - rel1,rel2,rel3,hfc,Team1_Changes,Team2_Changes
+					
+						Integration_Branch1 - rel1,rel2,rel3																# Team1
+										rel1,rel2,rel3,Developer_Branch1_Changes,Developer_Branch2_Changes							
+					
+							Developer_Branch1 -- rel1,rel2,rel3						
+												rel1,rel2,rel3,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3					
+													
+								feature_Branch1 - rel1,rel2,rel3							
+												rel1,rel2,rel3,f1cm1,f1cm2,f1cm3	
+
+								feature_Branch2 - rel1,rel2,rel3
+												rel1,rel2,rel3,f2cm1,f2cm2,f2cm3
+												
+							Developer_Branch1 -- rel1,rel2,rel3
+												rel1,rel2,rel3,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3					
+													
+								feature_Branch1 - rel1,rel2,rel3
+												rel1,rel2,rel3,f1cm1,f1cm2,f1cm3	
+
+								feature_Branch2 - rel1,rel2,rel3
+												rel1,rel2,rel3,f2cm1,f2cm2,f2cm3
+
+						Integration_Branch2 - rel1,rel2,rel3																# Team2
+										rel1,rel2,rel3,Developer_Branch1_Changes,Developer_Branch2_Changes							
+					
+							Developer_Branch1 -- rel1,rel2,rel3						
+												rel1,rel2,rel3,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3					
+													
+								feature_Branch1 - rel1,rel2,rel3							
+												rel1,rel2,rel3,f1cm1,f1cm2,f1cm3	
+
+								feature_Branch2 - rel1,rel2,rel3
+												rel1,rel2,rel3,f2cm1,f2cm2,f2cm3
+												
+							Developer_Branch1 -- rel1,rel2,rel3
+												rel1,rel2,rel3,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3					
+													
+								feature_Branch1 - rel1,rel2,rel3
+												rel1,rel2,rel3,f1cm1,f1cm2,f1cm3	
+
+								feature_Branch2 - rel1,rel2,rel3
+												rel1,rel2,rel3,f2cm1,f2cm2,f2cm3
+												
+		
+		
+	
+	Environment:  Web_Site 
+	
+		Non-Prod Environment														Production Environment
+		
+			Dev_Environment
+			Build_Environment (Unit Testing)
+			
+			Test 
+				QA 	- Quality Assurance Testing 
+				UAT	- User Acceptance Testing				=======>						Prod_Environments
+				
+				
+	Domain - Tele-comm Domain:
+	
+		- SP1 --> New Offer to their Customer --> outlets only.(Business User) == Website 
+		
+		
+		
+		Continuous Development ::	
+		
+			IDEs - Visual Studio Code access -  az repo.
+			
+			Install Visual Studio Code 		https://code.visualstudio.com/download
+			
+			
+			https://github.com/LoksaiETA/Java-mvn-app2
 		
