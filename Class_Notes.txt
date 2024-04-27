@@ -581,3 +581,195 @@ Scenario4:		Repo:
 			
 			https://github.com/LoksaiETA/Java-mvn-app2
 		
+************************
+Day 3 - 27th April 2024 
+************************
+
+	Azure DevOps --> 5 Services 
+
+	Azure Boards 
+	
+	Azure Repo
+	
+	Azure Pipelines 
+		- Build Pipelines 
+		- Release 
+		
+	
+	Implementation :
+	
+	Problem Statement :
+	
+		Using Azure DevOps Services on DevOps Teams' Perspective :
+		
+		DevOps Lead/Architect/Consultant :::
+		
+			Requirement to Implement DevOps to one of the Clients:
+			
+			
+	1. Detailed DevOps Assessment 
+	
+	2. Onboard the Applications 
+		
+		- Create Project Repo and CICD Pipeline to Build and Deploy Java Web Application 
+			
+		- Create Project Repo and CICD Pipeline to Build and Deploy .Net Web Application 
+		
+	3. Periodic Enhancement/Upgrade of DevOps Process and Pipeline Scripts
+
+		- Implement the Containerization using Docker & Kubernetes
+
+	4. Automate Infra-Structure Provisioning 
+	
+	Application/Project Lifecycle Management Tool:  - ALM 
+	
+	- Azure Boards :::
+	
+		Process used to Create Azure Project :
+		
+		
+		EPIC : DevOps Implementation																	# Epic(Parent to User Stories)	
+
+				1. Detailed DevOps Assessment 															# User Stories(Child to Epic)
+				
+				2. Onboard the Applications 
+					
+					- Create Project Repo and CICD Pipeline to Build and Deploy Java Web Application 	
+						
+					- Create Project Repo and CICD Pipeline to Build and Deploy .Net Web Application 
+					
+				3. Periodic Enhancement/Upgrade of DevOps Process and Pipeline Scripts
+
+					- Implement the Containerization using Docker & Kubernetes
+
+				4. Automate Infra-Structure Provisioning 
+		
+		
+		Basic Project Process:
+		
+			EPIC	
+				issue1
+					task1
+					task2
+				issue2
+					task 
+					
+		Agile Project Process:
+		
+			EPIC 
+				Feature - Q1
+					UserStory1	
+						task1
+						task2
+						bug2						
+					UserStory2
+				Feature - Q2
+					UserStory1 
+					UserStory2				
+
+		SCRUM Project Process:
+		
+			EPIC 
+				Feature - Q1
+					Product Backlog Item1	
+						task1
+						task2
+						bug2						
+					Product Backlog Item2
+				Feature - Q2
+					Product Backlog Item1
+					Product Backlog Item2				
+					
+					
+	
+	Azure Repo :::
+	
+		Import github Repo
+		
+		- Create a local repository
+		
+		- Push the repo to Azure Remote Repository
+		
+		
+		Install IDE - Visual Studio Code 
+		
+		Install git in the local Machine
+		
+			git cli in local machine 			# https://git-scm.com/downloads
+			
+			1. Create a local Repository using GIT CLi 
+			
+			2. Publish this repo to remote Azure Repo 
+			
+			3. Azure Repo. 
+				Branches
+				Pull Request 
+				Merge 
+				Repo Related Administration
+				
+		
+		Misc Git Topics :::
+		
+		
+			- git file Workflow 
+			
+			- git installation 
+			
+			- Create Local Repository 
+
+			- .gitignore
+			
+			- Misc. git command 		
+			
+			- Working with git config 
+			
+			- Working with undo - unstage 
+			
+			- Undo Commits - git reset / git revert 
+			
+			- Git Branches 
+			
+			- Branch creation
+			
+			- Merge 
+			
+			- Handle Merge Conflicts 
+			
+			- Rebase / squash 
+			
+			- Handle Local and Repositories 
+	
+	
+	Enhancement/Bugfix 
+	
+	New Project 
+			
+	git remote add origin https://lgeet124@dev.azure.com/lgeet124/Edu-DevOps-Project/_git/Edu-DevOps-Project
+	git push -u origin --all
+	
+	
+	fork 
+	
+	import 
+	
+	
+	Branching strategies :
+	
+		AzRepo is the target (master branch)  
+		
+			feature branch 
+			
+			github connection
+		
+		
+		
+		
+		Local Repo:
+		
+			master 
+			
+				feature1
+				
+				git rebase master 	# it is used to bring the incremental changes from local master branch to local feature branch
+				
+				git pull 			# it is used to bring the incremental changes from remote repo branch to local repo branch
