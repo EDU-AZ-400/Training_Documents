@@ -773,3 +773,245 @@ Day 3 - 27th April 2024
 				git rebase master 	# it is used to bring the incremental changes from local master branch to local feature branch
 				
 				git pull 			# it is used to bring the incremental changes from remote repo branch to local repo branch
+
+************************
+Day 4 - 28th April 2024 
+************************
+
+
+	- Continuous Integration using Azure DevOps Services 
+	
+	- Azure Pipeline :	Create the automated builds and Deployments - CICD Pipeline
+
+	Environment:  Web_Site 
+	
+		Non-Prod Environment														Production Environment
+		
+			Dev_Environment						(VM)	--> Dev Server 
+			Build_Environment (Unit Testing)	(VM)	--> Build Server (Agents)
+			
+			Test 
+				QA 	- Quality Assurance Testing (VM) 
+				UAT	- User Acceptance Testing	(VM)			=======>						Prod_Environments (VM)
+					
+			Target Server/Hosted Server/App Server
+			
+	- Azure Pipeline :
+	
+		- Build Servers are refered Agents
+		
+			Agents :
+			
+				Azure Managed Agent --> Initial Configuration will be done by MS
+				
+				Self Managed Agent --> Initial Configuration will be done by the DevOps Team
+				
+		- Jenkins_Master (VM)
+			Jenkins_Slave (VM) --> Build Server --> Install and config all the build tools.
+			
+			
+	- DevOps Assessment ::;
+		
+			- Interact with the Dev Teams 
+				- .Net 						
+				- Java 
+				- Python 
+				- NodeJS / Angular 
+				- Ruby
+				- GO
+			
+			- How the Application Build is performed ?
+			
+	- DevOps Team is responsible to Create the automated builds and Deployments - CICD Pipeline
+	
+		- Java Web Applications are built ?
+		
+			- Maven Build Tool - Automate the Build 
+				- Compile the src-code
+				- create artifacts/Application Package - *.war  
+				- unit testing 
+				
+				
+			Maven Project :::
+
+				- pom.xml 			# Used to define the dependencies and plugins that are required to build java applications
+				
+				- maven goals :		# Used to perform some task using Maven
+					- compile 
+					- test => compile + unit testing 
+					- package => compile, test, create artifacts in the target folder
+					- clean  => Used to clean the target folder 
+					
+					mvn clean package 
+				
+		https://github.com/LoksaiETA/Java-mvn-app2
+		
+		Azure Pipelines are written using *.yaml scripts # Declarative Scripts
+			- *.yaml file composed of key:value pairs
+			
+		azure-pipelines.yml
+		
+		json file format
+		
+			{
+				key:values 
+			}
+			
+		yaml file format 	
+		
+		Agent pool 	==> Collection of Agents 
+			Agent1
+			Agent2 
+			
+			
+		No hosted parallelism has been purchased or granted. To request a free parallelism grant, please fill out the following form https://aka.ms/azpipelines-parallelism-request
+			
+			
+			
+			Azure Build Pipeline
+			
+			Azure Release Pipeline 
+			
+		CICD Pipeline Composed of various stages :::
+		
+			SCM_Checkout 
+			
+			Application Build 
+			
+			Automated Unit Testing 
+			
+			Validate the Unit Test Coverage 
+			
+			Promote the artifacts to QA Server 
+			
+			Automated QA Testing 
+			
+			Promote the artifacts to UAT Server 
+			
+			Automated UAT Testing 		
+			
+			Promote the artifacts to Prod Server 
+			
+			Automated Prod Testing 
+			
+			Continuous Monitoring 
+			
+			Collect the feedback and share it with AD Team for further enhancement
+			
+			
+			
+			
+			Pipeline: Hosted Agent
+			
+				SCM_Checkout
+				
+				Application Build 
+				
+				Archive Artifacts 		to Artifactory Repository - Jfrog Artifactory/Azure Artifacts
+				
+				
+				Private Agent 
+				
+				
+				
+			Private Agents: 
+			
+			Java_Build_Server_Pool:
+					Java_build_Server1
+					Java_build_Server2
+					Java_build_Server3
+					
+					
+			Pipeline Execution: 
+			
+			pool:
+				Java_Build_Server_Pool
+				Java_build_Server1
+				
+				
+			SCM_Checkout ---> Application Build ---> Automated Unit Testing ---> Validate the Unit Test Coverage 		---> Promote the artifacts to QA Server 
+																				 SonarQube Analysis - Code Quality	
+																				 Quality Gating
+																				 
+			
+			
+			Testing Process:
+			
+				Test Cases / scenarios - 20 - 18 
+				
+				Test Data 
+								
+
+			Hosted Agent 
+			
+			Self-Hosted Agent
+			Private Agents: 
+			
+			Java_Build_Server_Pool:
+					Java_build_Server1
+					Java_build_Server2
+					Java_build_Server3			
+
+			My_Build_Servers:				# Agent Pool
+					Java_build_Server1		(VM)  --> 4GB RAM / 2CPU
+					Java_build_Server2	
+					.Net_build_Server3					
+					Python_build_Server4
+                    NodeJS_build_Server5
+                    Angular_build_Server6
+					
+			
+			Containerization :::
+			
+				Infra-Structure Perspective		: Is to reduce the no. of VMs
+				
+				My_Build_Agent_Pool:				# Agent Pool
+					Build_Server (VM)
+						Container_Engine
+							C1  Java_build
+							C2  Java_build
+							C3  .Net_build
+							C4  Python_build
+							C5  NodeJS_build
+							C6  Angular_build				
+				
+				
+				Deployment Perspective			: Is used Deploy the Applications to Target envionment without any compactibility Issues.
+				
+				
+				
+				Virtual Machine ::: 
+				
+					- VMs are Created using Hypervisor 
+					- VMs are Hardware level Virtualization 
+					- VMs are used to run Operating System
+					- VMs will continue to run even if there is no Active task/Application
+					- VMs Consume more space and time to start-up
+					
+					
+				Containers :::
+
+					- Containers are Created using Container Engine 
+					- Containers are OS level Virtualization 
+					- Containers are used to run the Tasks/Applications and NOT Operating System
+					- If there is no task/Application, Container will immediately go to EXIT State.
+					- Containers Consume less space and time to start the application and the execution will be faster
+					
+					
+					nginx Image --> 
+					
+					
+					centos image 
+					jdk
+					tomcat
+					
+					tomcat web app server in a container 
+					
+Next :
+
+		CICD - 
+
+		Setup - Self Hosted Agent 
+		Build the application in Self Hosted Agent 
+		Container Services to build the same applications
+		Kubernetes for deployment
