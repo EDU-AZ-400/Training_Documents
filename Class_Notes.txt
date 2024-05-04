@@ -1015,3 +1015,266 @@ Next :
 		Build the application in Self Hosted Agent 
 		Container Services to build the same applications
 		Kubernetes for deployment
+
+************************
+Day 5 - 4th May 2024 
+************************
+
+		CICD - 
+
+		Setup - Self Hosted Agent 
+		Build the application in Self Hosted Agent 
+		Container Services to build the same applications
+		Kubernetes for deployment
+		
+		
+		CI CD 
+		
+		Build Pipeline 
+		
+		Release Pipeline 
+		
+		
+		Build Pipeline :::
+		
+			SCM Checkout 		(AZURE/GITHUB Repo - Azure-pipelines & github Action) 
+			
+			Build 
+				Compile 
+				Create Artifacts 
+				
+			Deploy to Target Environment 
+				Test 
+					QA 
+					UAT 
+					
+				Prod Environment	
+				
+				
+		1. How to Build and Deploy the Artifacts to Target using Az_pipelines 
+		2. How to Build and Create Container Image and Publish to Container Registry - ACS / ACR
+		3. Deploy the Application Containers to Target Environments using Kubernetes - AKS
+		4. Build Server / Test Server 
+			- IAC - Terraform to Provision/Create the Servers 
+			
+		5. Upon Build - Security Aspects --> 
+				Unit Test Cases 	--> Automated Uniting in CI Pipeline 
+										Capture the Test Coverage.
+				Code Quality Analysis --> SonarQube Analysis 
+											-> Coding Standards
+											-> Bugs / Vul
+											-> Major / Minor
+				IDE - Visual Studio / Sonarlint
+		DevSecOps 									
+				CICD --> Shift left Approach 
+				
+		
+		
+		Build in the Self Hosted Agent :::
+			https://portal.azure.com/
+		
+			- Launch a VM in Azure Cloud Platform 
+			- Install all the required build tools 
+			- Create Agent pool 
+				- Add this VM as a self hosted Agent.
+				
+		Java Web Application - Maven Spring boot App 
+			- Build Tools?
+				- git 
+				- jdk 
+				- maven
+		
+		.Net Application 	=> Launch Window Machine 
+		
+		
+		To Access the Remote Server :
+		
+			SSH -
+			
+				Host Name	- 
+				User Name 
+				Credential - password/Access token/Key pair(Public & Private)
+				
+				
+		Launch a VM 
+		
+		Connect to VM 
+			- Web Browser to connect 
+			- SSH Clients 		Window 
+				- putty
+				- MobaXterm 		# https://mobaxterm.mobatek.net/download.html choose Installer Edition
+			- Terminal 
+			
+		
+		Package Manager:
+			- Manage Linux Packages - Install/Uninstall/Upgrade 
+			
+			Ubuntu - apt-get / apt 
+			centos/rhel - yum 
+			fedoro - dnf 
+		
+		Set up Build Server :::
+		
+			Connect VM using MobaXterm 
+			
+			clear
+			
+			sudo -i
+			
+			apt update -y 
+			
+			sudo apt install git -y 
+			
+			git --version 
+			
+			sudo apt install openjdk-11-jre -y
+			
+			java --version 
+			
+			sudo apt install maven -y
+			
+		Agent Pool is the collection of Hosted Agents 
+		
+		Create a User-defined Agent Pool 
+		
+			- Add a Self Hosted Agent
+			
+		Goto the Organization - Choose - Agent Pool and Add Agent Pool
+		
+				
+		https://dev.azure.com/lgeet124
+
+		
+		
+		./config.sh 		# Config the Agent
+		
+		./run.sh			# Start the Agent 
+		
+		./svc.sh			# Run the Agent as a start up task
+		
+		
+		How to Config the Self Hosted agent with the build tools :
+		
+		How to create Agent within the Organization :
+		
+		How to Register the Agent with the Organization :
+		
+		
+		
+		./config.sh remove 	# Used to remove the Agent from the build server 
+
+    1  clear
+    2  sudo -i
+    3  apt update -y
+    4  sudo -i
+    5  ls
+    6  ls -a
+    7  clear
+    8  ll
+    9  ls
+   10  mkdir myagent && cd myagent
+   11  pwd
+   12  ls
+   13  wget https://vstsagentpackage.azureedge.net/agent/3.238.0/vsts-agent-linux-x64-3.238.0.tar.gz
+   14  ls
+   15  tar zxvf vsts-agent-linux-x64-3.238.0.tar.gz
+   16  ls
+   17  ./config.sh
+   18  history
+
+
+
+	AZBuilderSErvers 		- Agent pool 
+	
+		a1
+		
+	Web App Server Configuration 
+	
+		Create App Server for Deployment :
+	
+	
+	Build Pipeline  		CI 
+	
+	Release Pipeline 		CD 
+	
+	
+	Deployment ????
+	
+		Is a process of copy the artifacts from source server to the target server 
+		
+	Monolith Application:
+	
+	DEV Environment --> VS Code - jdk11, tomcat_v8.5  == successfull tested
+	
+	Source Server ?															Target Server ?
+	
+		Build_Server 															Test server (QA)/UAT/PROD
+			
+		target/*.war																App Server - Target Location/Path 
+																					Tomcat --> tomcat/webapps/*.war
+																					nginx  --> nginx/*.html
+																					
+																					jdk11, tomcat_v8.5
+																					jdk17, tomcat_9
+																					
+	Micro-Service :::
+	
+	E_Commerce Web Application :
+	
+		USer_Login 			- SRC_Code Repo - Dev, Build - jdk11, tomcat_v8.5
+		USer_Registration	- SRC_Code Repo - Dev, Build - jdk17, tomcat_v9
+		Search				- SRC_Code Repo - Dev, Build - Openjdk17, Java Embededded WebApp Server 
+		
+	
+	Test Environment ::
+	
+	App Server - Target (VM) -	QA :
+	
+		jdk11, tomcat_v8.5
+		jdk17, tomcat_v9
+	    Openjdk17, Java Embededded WebApp Server
+		
+	Containerization :::
+		C1 - USer_Login 		  - (user_login.war,jdk11, tomcat_v8.5)
+		C2 - USer_Registration    - (USer_Registration, jdk17, tomcat_v9)
+	
+	Terminologies:
+	
+	Containerization		# Is a process of packing the application along with its dependencies
+	
+	Images 					# Is static file - that define the properties of Container 
+							# Images are Non-Executable
+							# Images are save/version controlled in the Container Registry
+	
+	Container 				# Its is an executable entity of Container Image
+	
+	Container Registry		# Is used to save/version controlled in the Container Images 
+										dockerhub 
+										
+				Build - User_Registration.war_v1.0		===> User_Registration_AppImage_v1.0
+						User_Registration.war_v1.1		===> User_Registration_AppImage_v1.1
+						User_Registration.war_v2.0		===> User_Registration_AppImage_v1.2
+						
+						
+						Src_Code are version controlled using github/Az Repo 
+						
+						These artifacts are version controlled in Artifactory Libraries - Jfrog / Az Artifacts
+						
+						These Application Contianer Images are version controlled in Container Registry - Dockerhub / ACR
+						
+						ACS / ACR / AKS 
+						
+						ACS is to Create and Manage the Container Images and Containers
+						
+						
+						
+	Container Repository 	# Is a Subset of Container Registry 
+	
+										At Enterprise level I can have a Account in DockerHub
+											Dev_Team1/ 1,2,3,4,5
+											Dev_Team2/
+
+																					
+Next ::
+
+	Deploy of Applications using Az Pipeline 		
