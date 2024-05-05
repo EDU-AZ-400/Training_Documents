@@ -1278,3 +1278,181 @@ Day 5 - 4th May 2024
 Next ::
 
 	Deploy of Applications using Az Pipeline 		
+
+
+************************
+Day 6 - 5th May 2024 
+************************
+
+	CD ::
+	
+	Azure Pipelines :
+	
+		- Build Pipeline 			CI 		(Build Environment) Managed Hosted Agent / Self Hosted Agent 
+			
+		- Release Pipeline 			CD 		(Target Environment) QA/UAT/Prod - Azure Web App Server / Other Target Nodes 		
+		
+		- Docker 
+		
+		- Deployment 
+	
+	
+	git remote add origin https://lgeet124@dev.azure.com/lgeet124/Edu-AzDevOps-JavaProj1/_git/Edu-AzDevOps-JavaProj1
+	git push -u origin --all
+	
+	
+	notepad++_v2-3-14.exec ==> 
+	
+		CD ::
+		
+	- Release Pipeline 		-	CD 		(Target Environment) QA/UAT/Prod - Azure Web App Server / Other Target Nodes 	
+
+
+	Continuous Integration and Continuous Deployment Pipeline Using Azure DevOps Services :
+	
+	
+	Micro-Service Based Deployment using Containers
+	
+	Contianers :::
+	
+		Architecture of Docker Continer Engine 
+		
+		Create Container Images 
+		
+		Create/Run the container 
+			- Foreground/Attached Mode		 
+			- Backgorund/Detached Mode
+			- Interactive Mode 
+			
+		Stop/Start The contianers
+		
+		web Application : container:
+	
+		Continer Volume 
+		
+		Contianer Port Mapping 
+		
+		Container Orchestration Tool - 
+			- Docker Compose 
+			- Docker Swarm
+			
+			- Kubernetes
+			
+	
+	Terminologies:
+	
+	Containerization		# Is a process of packing the application along with its dependencies
+	
+	Images 					# Is static file - that define the properties of Container 
+							# Images are Non-Executable
+							# Images are save/version controlled in the Container Registry
+	
+	Container 				# Its is an executable entity of Container Image
+	
+	Container Registry		# Is used to save/version controlled in the Container Images 
+										dockerhub 
+										
+				Build - User_Registration.war_v1.0		===> User_Registration_AppImage_v1.0
+						User_Registration.war_v1.1		===> User_Registration_AppImage_v1.1
+						User_Registration.war_v2.0		===> User_Registration_AppImage_v1.2
+						
+						
+						Src_Code are version controlled using github/Az Repo 
+						
+						These artifacts are version controlled in Artifactory Libraries - Jfrog / Az Artifacts
+						
+						These Application Contianer Images are version controlled in Container Registry - Dockerhub / ACR
+						
+						ACS / ACR / AKS 
+						
+						ACS is to Create and Manage the Container Images and Containers
+						
+						
+						
+	Container Repository 	# Is a Subset of Container Registry 
+	
+										At Enterprise level I can have a Account in DockerHub
+											Dev_Team1/ 1,2,3,4,5
+											Dev_Team2/
+		
+	Container Engine		# Is used to Manage the Container.
+							# Create/Delete/Manage the Container Images / Container.
+		
+	Dockerhub --> 	
+	
+	ACR 	  -->
+	
+	
+	Working with Docker :
+	
+		- Install Docker Engine :::
+			https://docs.docker.com/engine/install/ubuntu/
+			apt install docker.io -y
+			
+			
+	Misc Docker CLI Commands ::
+	
+		docker --version
+		
+		docker images 			# List the Container Images in that local machine 
+		
+		docker ps 				# List the Active/Running Containers
+		
+		docker ps -a			# List all the Container(running/stopped state) 
+
+		Containers :::
+
+			- Containers are Created using Container Engine 
+			- Containers are OS level Virtualization 
+			- Containers are used to run the Tasks/Applications and NOT Operating System
+			- If there is no task/Application, Container will immediately go to EXIT State.
+			- Containers Consume less space and time to start the application and the execution will be faster
+			
+		Modes of Container Execution	
+			- Foreground/Attached Mode		! This will lock the terminal 	
+					docker run centos 
+				
+			- Backgorund/Detached Mode
+					docker run -d centos sleep 20
+				
+			- Interactive Mode 
+					docker run -it centos bash
+					
+		
+		docker exec -it <container_id> bash			# used to Login to running container
+		docker exec -it b1ed842a8c4f bash
+		
+		docker stop <Container_id>
+		docker start <Container_id>
+		
+		Container Port Mapping / Binding 
+		
+		
+		docker run -it -p 8085:8080 tomcat:8.0
+		
+		-p <Host_Port>:<Container Port>
+		
+		Docker Volume :
+		
+			Used to maintain the persistant Volume to the Container.
+			
+			Stateless Applications	- Will no have any trace of execution 
+			Stateful Applications	- Will have any trace of execution atleast in the form of Log files,Report,
+			
+			
+			Persistant Volume :::
+
+			docker volume list 
+			docker volume create v1
+			
+
+Next :::			
+		How to Create Container Images ?
+		
+			- docker commit 
+			
+			- docker build 
+			
+		Publish the images to container registry 
+		
+		Deploy the Application Images to Target Servers using Kubernetes
