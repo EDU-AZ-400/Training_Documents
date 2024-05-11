@@ -1456,3 +1456,300 @@ Next :::
 		Publish the images to container registry 
 		
 		Deploy the Application Images to Target Servers using Kubernetes
+
+
+
+***********************
+Day 7 - 11th May 2024 
+***********************
+
+
+	- Create Container Images :
+	
+	
+	Deployment :::
+	
+		Target Environments :::
+		
+			App Server (Managed/Self-Hosted)			*.war / *.jar 
+			
+		Build Container Images ::::
+		
+		Docker Build Command ??
+		
+		Dockerfile ??
+		
+		
+		Why to Containerize the Application ????
+		
+			Create Application Artifacts - published to Az Pipeline.
+			
+			webapp.war --> To execute ?
+			
+	Containerization :::
+		C1 - USer_Login 		  - (user_login.war,jdk11, tomcat_v8.5)
+		C2 - USer_Registration    - (USer_Registration, jdk17, tomcat_v9)		
+
+
+	How to Create an Application Container Image ???
+	
+		docker commit 
+			- It is used to create a container Image based on the existing Container
+			- Existing Container ID is input 
+		
+		
+		docker build 
+			- It is used to create a container Image based on the Dockerfile definition
+			- Dockerfile is a input to use docker build 
+			
+		CICD --> 
+		
+			How to write a Dockerfile ???
+
+	Images 					# Is static file - that define the properties of Container 
+							# Images are Non-Executable
+							# Images are saved/version controlled in the Container Registry(dockerhub/ACR)	
+							# It is composed of various layers.
+							
+		
+		
+			QA _ Test Server :
+			
+				- Tomcat:
+				
+					- Install the Pre-requisites 				SQL Database Server (VM)
+					
+					- Install the actual package 
+					
+					- Perform the post installation activities 
+					
+				- How to setup a Tomcat Server ??		# 8080 is default port
+				
+					- JDK / JRE 
+					
+					- Setup the Environmental Variable - JAVA_HOME 
+					
+					- Enable port 8080
+					
+					- Install the tomcat_v8.5
+					
+					- Start the tomcat server and available it to run in port 8080
+				
+				Tomcat is a web application server :
+				
+					- QA - Environment - Tomcat - VM1 - 8080 - to test application1
+					- QA - Environment - Tomcat - VM2 - 8080 - to test application2
+					
+				Using Containers we can reduce the no. of VMs. 
+				
+					- QA Environment(VM1)	
+							Install Container Engine 
+								Create C1 - (tomcat_image,webapp1.war)		==> run in port 8080
+								Create C2 - (tomcat_image,webapp2.war)		==> run in port 8085
+								
+				Dockerfile :::
+				
+		CICD Pipeline ::
+		
+			- SCM_Checkout
+			
+			- Application_Build 		==> mywebapp.war 
+			
+			- Build Container Image 	==> mywebapp_Image:v1.0
+			
+			
+		Dockerfile :::
+		
+			Instruction used in Dockerfile :::
+			
+			
+			FROM 				# Used to refer the base image in Dockerfile 
+			
+			RUN					# Used to execute the package manager(yum/apt/dnf) within the container 
+			
+			COPY				# Used to copy the files from Host Machine Volume to Container Volume
+
+			CP 					# Used to copy the files within the Container
+			
+			ARG 				# Used to pass the arguments 
+			
+			ADD 				# Used to copy the files from Host Machine Volume/web_URLs to Container Volume
+			
+			ENV 				# Used to create Environment Variable 
+			
+			WORKDIR				# Define the current working dir.
+			
+			EXPOSE 				# Used to expose container port / set the container port 
+			
+			CMD					# Used to define the startup task/command
+								# The Commands can be changed whenever we start a new container
+								
+			ENTRYPOINT			# Used to define the startup task/command
+								# This cannot be modified at runtime.
+			
+			
+			
+			docker run centos "bin/bash"
+			
+			docker run centos "sleep 20"
+			
+			docker run centos "sleep 20 echo 'Hello'"
+			
+			
+			docker commit 
+			
+				Application Team needs a Application Image to Build java mvn webapp 
+				
+				- jdk 
+				- git 
+				- maven 
+				
+				
+			VM1/C1 --> Created in Az using Terraform 
+			
+				VM1/C1 - should be istalled with git,jdk,python 
+				
+				
+
+				ENTRYPOINT "apt install git"
+				
+				
+CMD ["catalina.sh" "run"]
+
+				
+				
+				docker run tomcat:8.0  
+
+				
+docker run -it -p 8085:8080 tomcat:8.0 
+
+
+docker run -it tomcat:8.0 bash 
+
+
+docker run -it ubuntu bash
+
+# apt update -y
+# apt install git -y 
+# apt install maven -y 
+# exit 
+
+docker commit f5b3008092aa loksaieta/azbsimg:v1.0
+
+	
+Push the Images to Container Registry ????
+
+	Login to Dockerhub using docker cli 
+	
+		docker login  -u loeta
+	
+		UserName 	loksaieta
+		
+		DockerHub Access Token		ASDASDASDADASDASDASDASd(Dockerhub access token)
+	
+	Push to Dockerhub Registry
+
+	docker push <image_name>
+	
+	docker tag loksaieta/azbsimg:v1.0 loksaieta/azbsimg:latest
+	
+	docker push loksaieta/azbsimg:v1.0
+	
+
+root@SA-Jenkin-Slave-Node:~/dockercontent# cat Dockerfile
+
+FROM ubuntu
+RUN apt update
+RUN apt install git -y
+RUN apt install maven -y
+	
+docker build -t loksaieta/azbs1img .
+
+FROM tomcat:8.0
+COPY ./target/loksaieta.war /usr/local/tomcat/webapps
+EXPOSE 8080
+	
+docker build -t loksaieta/mywebappimg .
+
+
+Container Registry :::
+
+	Azure DevOps ::
+	
+		Azure Container Registry
+		DockerHub 
+		Google Container Registry
+		
+		
+	How to build an application, create container Application Image and publish to Container Registry(ACR/Dockerhub)
+	
+	Create Container Registry (DockerHub/ACR)
+	
+	Link Container Registry with the Az DevOps Project using Service Connection
+	
+	Create CICD Pipeline ::
+	
+	Stages ::
+	
+		- SCM_Checkout
+		- Build Application ==> *.war 
+		- Copy the artifacts to target artifactory library/publish to az pipeline 
+		- Build Container Image 
+		- Push the image to Container Registry(ACR) 
+		
+		- Deployment :::
+			- App Server - Container Instance   --> Target server
+			
+			- Kubernetes Cluster - (AKS)
+			
+			- Monitoring 
+			
+			- Performance related best practise
+			
+		
+	
+	
+# Maven
+# Build your Java project and run tests with Apache Maven.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.8'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    goals: 'package'
+- task: CopyFiles@2
+  inputs:
+    Contents: '**'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'mywebapp'
+    publishLocation: 'Container'
+- task: Docker@2
+  inputs:
+    containerRegistry: 'japp2dockerhubsc'
+    command: 'login'
+- task: Docker@2
+  inputs:
+    containerRegistry: 'japp2dockerhubsc'
+    repository: 'loksaieta/japp2img'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+    tags: 'latest'
+
+				
