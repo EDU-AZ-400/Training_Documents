@@ -1753,3 +1753,213 @@ steps:
     tags: 'latest'
 
 				
+***********************
+Day 8 - 12th May 2024 
+***********************	
+
+	--> Deployments ::::
+			- App Server 
+			- Kubernetes 
+			- AKS
+			- Container Instance 
+			
+		-> Deployment Servers / Target 
+		
+			- Deployment Strategies to be followed
+			
+		-> IAC Tool -> Terraform / ARM 
+			
+			- Azure Pipeline -> to create App Servers 
+			
+		-> Monitoring 
+		
+		-> Security & Policies 
+		
+	Demo: 
+	
+	-> Deployment Servers / Target 
+	
+		- Deployment Strategies to be followed	
+		
+	Non-Prod Environment								Production Environment 
+	
+		- QA 
+		- UAT												Prod Server -->  *.exec / *.war  ==> 24/7
+																		prod Instance1,2,3,4,5,......,10
+																				- to ensure High Availability
+		
+		1 instance of App Server 
+		
+			Deployed the Application
+			
+		Web Application :
+		
+			E_Commerce portal. 
+			
+				Deploy! 
+					- Desktop - Windows/Linux/Mac
+						- Chrome
+						- Firefox
+						- MS Edge 
+						
+					- Mobile Device 
+						- Mobile Apps
+						
+						
+					- Tablets
+					
+					amazon.com 
+					
+					gmail.com 
+					
+					
+		Containerized Deployment :::  
+		
+			Payment_Service 
+		
+			3-tier Application:
+			
+				- Front_End Layer		C1.1,C1.2,C1.3 		--> replicas 
+				
+				- Application Layer		C2.1,C2.2,C2.3
+
+				- Database Layer 		C3.1,C3.2,C3.3
+				
+				
+			Container Orchestration Tools ::
+			
+				Docker Swarm 
+				Docker Compose 
+					- Is used to run multiple containers as a Service 
+					- It a manifest file *.yaml 
+					
+						service1:
+							c1:
+								fe_img1
+							c2:
+								app_img1							
+							c3:
+								db_img1
+								
+					docker-compose up / down
+					docker run 
+				
+				Docker Swarm :::
+							Is the Container Orchestration Tool meant only for Docker Containers
+				            Is to Ensure High Availability of Containers by creating replicas
+				            Scale-up/down the containers 
+				            
+				
+				
+				
+				Kubernetes :: 	Is the Container Orchestration Tool 
+								Is to Ensure High Availability of the Applications/Services running thru containers
+								It helps to perform Auto Scaling 
+								Load Balancing
+								Deployment Controller Objects Used to run the containers in its desired state.
+									- 3 copies of pods/containers shd be up and running
+								
+				Kubernetes Architecture ::
+					API Server 
+					ETCD 
+					Scheduler
+					Controller Manager 
+					
+					Kubelet 
+					Kubeproxy
+					CRI - Container Runtime Interface
+					
+					Kubectl 
+				
+					Kubernetes Master & WorkNodes :
+					
+						Kubernetes_Master				# Control Plane
+							Kubernetes_WorkerNode1
+							Kubernetes_WorkerNode2
+							Kubernetes_WorkerNode3
+							Kubernetes_WorkerNode4
+							Kubernetes_WorkerNode5
+							
+					****Kubernetes Developer / Administrator / Security Admins 
+					
+		Service ::
+
+		
+		- Front_End Layer		C1.1 - Pod1			
+					
+		- Application Layer		C2.1 - Pod2 				
+					
+		- Database Layer 		C3.1 - Pod3
+		
+	
+		Deployment Strategies ::::
+		
+			--> IAAS
+			
+			--> PAAS 
+		
+			
+		Kubernetes ::	
+		
+			- Rolling Update Deployment Strategy		# Default  to ensure zero downtime!
+	
+	
+				p1,p2,p3		==> Application		mywebapp_img1:v1.0 Current version 
+				
+				p1,p2,p3		==> Application		mywebapp_img1:v1.1 New version 
+				
+				
+				
+			www.amazon.com 
+			
+				20 Instance of Pod 		--> Service for 10000 users > 50000 Users ??
+				
+				1000 Pods 
+				
+				Auto Scaling - Up/Down
+				
+						Kubernetes_Master				# Control Plane
+							Kubernetes_WorkerNode1
+							Kubernetes_WorkerNode2
+							Kubernetes_WorkerNode3
+							Kubernetes_WorkerNode4
+							Kubernetes_WorkerNode5,6,7,8,9,...,10
+							
+				
+				Monitoring Mechanism!
+				
+				
+		Terraform :::
+		
+			Working Principle/Model:::
+			
+				Is a IAC Tool used to provision the resource(Azure/AWS/GCP/VMware,AKS,EKS,)
+				
+			1. Identify the scope (Target Environment)
+			2. Write the Terraform Script to Create the Resources
+				Az  - Virtual Machine 
+				AWS - EC2 Instance 
+			3. Terraform Init -- Is used to download the terraform provider
+			4. Terraform Plan --> Is used to Preview the Script
+			5. Terraform Apply --> Is used to implement the changes on the target envionment
+		
+		Install in Local Machine:
+		
+		1. Visual Studio Code :
+		
+		2. Terraform 
+				
+				
+				App_Source Code :
+				
+					src 
+						-> Appln code 
+						-> Testing 
+					target 
+					app_properties 
+					
+					
+			SonarQube Analysis :::
+				--> 
+					
+			
