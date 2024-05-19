@@ -1962,4 +1962,449 @@ Day 8 - 12th May 2024
 			SonarQube Analysis :::
 				--> 
 					
+
+***********************
+Day 9 - 18th May 2024 
+***********************	
+
+	Working with Azure Kubernetes Service 
+	
+	- Create AKC and Deploy the containerized application 
+	
+	- DotNet Applications & Java Springboot applns
+	
+	- Security and Code Quality Analysis
+	
+		-> SonarQube ==> Enterprise Application
+		
+		-> SonarCloud ==> Open-Source Projects
+		
+		
+	Azure Kubernetes Service:
+	
+	AzKubernetes Cluster :
+	
+		Nodes 
+		
+		Deployment Controller Object 
+		
+		Service 
+			- Load Balancer Service
 			
+		Service Account :::
+		
+	
+		Non-Prod Kubernetes Cluster 										Prod Kubernetes Cluster
+		
+			QA(Namespaces) 
+			UAT(Namespaces)														Production Nodes
+
+
+Node pool :
+				K8s_Master
+					Kubernetes_Master01				# Control Plane
+						Kubernetes_Master1				# Control Plane
+							Kubernetes_WorkerNode1
+							Kubernetes_WorkerNode2
+							Kubernetes_WorkerNode3,4,5,6,7
+						Kubernetes_Master2			# Control Plane
+							Kubernetes_WorkerNode1
+							Kubernetes_WorkerNode2
+							Kubernetes_WorkerNode3,4,5,6,7
+						Kubernetes_Master1				# Control Plane
+							Kubernetes_WorkerNode1
+							Kubernetes_WorkerNode2
+							Kubernetes_WorkerNode3,4,5,6,7
+					Kubernetes_Master02				# Control Plane
+						Kubernetes_Master1				# Control Plane
+							Kubernetes_WorkerNode1
+							Kubernetes_WorkerNode2
+							Kubernetes_WorkerNode3,4,5,6,7
+						Kubernetes_Master1				# Control Plane
+							Kubernetes_WorkerNode1
+							Kubernetes_WorkerNode2
+							Kubernetes_WorkerNode3,4,5,6,7
+						Kubernetes_Master1				# Control Plane
+							Kubernetes_WorkerNode1
+							Kubernetes_WorkerNode2
+							Kubernetes_WorkerNode3,4,5,6,7	
+							
+						Pods Deployed :
+						
+							30 Replicas of pods 		--> 1000 users
+							
+							
+							
+					Worknode1		- VM 
+						- Pod1 
+							- c1,c2
+						- Pod2 
+							- c1,c2						
+							
+					Kubernetes Namespace - Is the logical partition of cluster.
+		
+			
+			Az DevOps Services 
+
+				Az DevOps Project
+					Src_Code Repos
+					CICD Pipelines 
+						Deployment 
+							- App Server 
+							- az Container Registry 
+							- az Kubernetes Cluster 
+					
+						github 
+						bitbucket 
+						dockerhub 
+						
+							
+							
+			Az Infra Service 
+							- Container Registry 
+							- Kubernetes Cluster 
+													
+	
+			Service Connection is used to connect to any external resource from Az DevOps Project.
+			
+			
+			
+			Job1 	- running in az platform to deploy --> creates logs/report/metrics 
+			
+			Job2 	- deploy the metrics from az platform to Local VMware
+			
+				E(job1) T(Job2) L(Job3) --> 
+				
+			Kubernetes Services :
+			
+				ClusterIP Service 	-- Used to access the pods within the cluster 
+				NodePort 			-- Used to Expose the Pods to Internet 
+				Load Balancer 			# is not part of Kubernetes - It is a external service provide by Cloud SP
+				Ingress Controller 
+			
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loksai-eta-deploy
+  labels:
+    app: loksai-eta-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: loksai-eta-app
+  template:
+    metadata:
+      labels:
+        app: loksai-eta-app
+    spec:
+      containers:
+      - name: loksai-eta-container
+        image: loksaieta/loksai-eta-app
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: loksai-eta-np-service
+  labels:
+    app: loksai-eta-app
+spec:
+  selector:
+    app: loksai-eta-app
+
+  type: LoadBalancer
+  ports:
+  - protocal: TCP
+    port: 8080
+    targetPort: 8080
+
+
+
+
+
+ksdevopsjavawebapp
+
+	Nodeport service will create a port bases on range 30000 to 32767 
+	
+	www.google.com --> IP (Load Balancer Service IP)
+	
+	
+	Ingress Contoller Object :::
+	
+	Load Balancer Service ::::
+	
+		-- Application Level 
+			
+				- service1		Ingress Rules 	-> simple/path/host based 
+				- service2 		Ingress Rules 
+
+
+
+
+		loksaieta.blogsite 
+		
+		www.google.com 
+			- https://translate.google.com/			--> Host based routing 
+			- news.google.com
+			
+		
+		www.gmail.com
+			- inbox 
+				-- www.gmail.com/inbox 				--> Path based routing 
+				-- www.gmail.com/sent
+
+
+
+# Docker
+# Build and push an image to Azure Container Registry
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+- master
+
+resources:
+- repo: self
+
+steps:
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.8'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    goals: 'package'
+- task: CopyFiles@2
+  inputs:
+    Contents: '**/*.war'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'mywebapp'
+    publishLocation: 'Container'
+- task: Docker@2
+  inputs:
+    containerRegistry: 'japp2CR'
+    repository: 'ksdevopsjavawebapp'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+    tags: 'latest'
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)'
+    artifact: 'k8sconfigfiles'
+    publishLocation: 'pipeline'
+- task: KubernetesManifest@1
+  inputs:
+    action: 'deploy'
+    connectionType: 'kubernetesServiceConnection'
+    kubernetesServiceConnection: 'az-400-akc-sc1'
+    manifests: '$(Build.SourcesDirectory)/k8smvndeployment.yaml'
+	
+	
+subscription
+ active dir -- app registration -- 	create app registration
+ 
+ goto new app registration -- create secret
+ 
+
+***********************
+Day 10 - 19th May 2024 
+***********************	
+
+		Terraform to provision Azure Resources 
+		
+		Code Quality Check using Sonar Cloud/SonarQube 
+		
+		
+		
+		IAC Tools --> 
+		
+			Infra-Structure Provisioning! 
+			
+			Azure ->
+			
+				Adhoc Requirement - bug fixing/Change Request 
+			
+			Aug_rel:
+			
+			Build Cycles 		- Build Servers (Self Hosted Agents)
+			
+			Test Cycles			- Test Servers (Self Hosted Agents)
+			
+			Release Cycles
+			
+			
+			Dynamically Create the Self Hosted Agents for Adhoc Request :
+			
+			Build_Server 
+			
+			Web App_Server 
+			
+			IAC Tools - Terraform 
+			
+				- Terraform is a IAC Tools used for Provisioning the Infra-Structure/Resources.
+				
+				
+				- Add/Create the resource 			+ 
+				
+				- Destroy/Delete the resource 		-
+			
+				- Update/Modify the resource		~
+				
+			
+			Install Terraform : 			
+					- In Local Windows/Linux/Mac
+							https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
+							
+						Download AMD64 package for Windows 
+						
+						Extract 
+						
+						terraform.exe
+						
+						Setup the Environment Variable for terraform
+					
+			Visual Studio Code IDE :
+					- To Code the Terraform Scripts 
+					
+						https://code.visualstudio.com/download
+						
+						Install VS Code 
+						
+						Install Hashicorp Terraform Extension for VS Code 
+						Azure Terraform Extension 
+			
+			Target Infra-Structure :
+			
+					- Azure / AWS / GCP
+					- On-prem Servers 
+					
+			Working Principle/Model:::
+			
+				Is a IAC Tool used to provision the resource(Azure/AWS/GCP/VMware,AKS,EKS,)
+				
+			1. Identify the scope (Target Environment)
+			2. Write the Terraform Script to Create the Resources		
+						# Terraform Scripts are written using HCL(Hashicorp Declarative Language) - it is based on json file format
+				Az  - Virtual Machine 
+				AWS - EC2 Instance 
+			3. Terraform Init -- Is used to download the terraform provider
+			4. Terraform Plan --> Is used to Preview the Script
+			5. Terraform Apply --> Is used to implement the changes on the target envionment			
+	
+	
+terraform {
+  required_providers {
+    azurerm={
+        source = "hashicorp/azurerm"
+        version = "3.104.0"
+    }
+  }
+}
+
+
+goto Azure Active Directory :
+
+	Create
+	
+
+
+provider "azurerm" {
+  subscription_id = "41cdead7f7c1afe"
+  tenant_id = "b238637d800971cd6"
+  client_id = "ce1f409ab187714"
+  client_secret = "tbcnRkl3xjflfr6hII6nIdAd"
+  features {}
+}
+
+resource "azurerm_service_plan" "az-400-tasp1" {
+  name                = "az-400-tasp1"
+  resource_group_name = "tfrg1"
+  location            = "Central India"
+  os_type             = "Windows"
+  sku_name            = "F1"
+}
+
+resource "azurerm_windows_web_app" "az-400wa1" {
+  name                = "az-400wa1"
+  resource_group_name = "tfrg1"
+  location            = "Central India"
+  service_plan_id     = azurerm_service_plan.az-400-tasp1.id
+
+  site_config {
+    always_on = false
+    application_stack {
+      current_stack = "dotnet"
+      dotnet_version = "v6.0"
+    }
+  }
+
+    depends_on = [ azurerm_service_plan.az-400-tasp1 ]
+}
+	
+	
+	Infra-Structure Provisioning :
+	
+		Release-Pipeline :
+			Terraform Script should be part of source code repo.
+			
+			src_code repo.
+			
+			Terraform Task.
+			
+	
+		CI/CD Pipeline :
+			builds & Deployments
+	
+	
+	terraform.tfstate ????
+		- Is used to maintain the current state of the resource.
+		
+	
+	
+	SonarCloud : https://sonarcloud.io/login
+	
+	
+	
+	CICD Pipeline Workflow :::
+	
+	Pipeline Stages :
+
+		SCM_Checkout 
+		
+		Application Build --> Compile and create artifacts and unit testing(10 unit test cases)
+		
+		SonarQube Analysis
+			- Bugs,
+			- Vul,
+			- Coverage - Code Coverage & Test Coverage 
+			
+			- Verify the Quality Gating.
+		
+		Docker Build 		--> create application images 
+		
+		Publish image to container Registry 
+		
+		Deploy to Non-Kubernetes Cluster 
+			QA Namespace 
+			
+			UAT Namespace 
+	
+		Deploy to Prod-Kubernetes Cluster 	
+			Prod-Namespace 
+	
+		Shift Left Approach :::
+	
+	https://learn.microsoft.com/en-us/credentials/certifications/exams/az-400/
+	
+	https://azuredevopslabs.com/
+	
+	Dotnet project repo. :
+	https://github.com/Edu-CKA-Jan06/devops-webapp			
